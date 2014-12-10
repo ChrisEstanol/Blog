@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+    @last = Article.order("created_at DESC").limit(5)
   end
 
   def edit

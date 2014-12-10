@@ -16,6 +16,8 @@
                       method: :delete, data: { confirm: 'Are you sure?' } %></span>
     </div>
   </div>
+  <% end %>
+  <% @last.each do |article| %>
   <div class="col-xs-4">
     <div class="post" style="background-color: lightgrey; margin-top: 5px; padding: 5px;">
       <h4 style="display: inline-block;"><%= article.title %></h4>
