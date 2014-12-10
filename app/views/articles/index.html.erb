@@ -1,23 +1,28 @@
 <h1>Listing articles</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th colspan="2"></th>
-  </tr>
+<%= link_to 'New article', new_article_path %>
+
+
 
 <% @articles.each do |article| %>
-  <tr>
-    <td><%= article.title %></td>
-    <td><%= article.text %></td>
-    <td><%= link_to 'Show', article_path(article) %></td>
-    <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    <td><%= link_to 'Destroy', article_path(article),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <div class="col-xs-8">
+    <div class="post" style="background-color: lightgrey; margin-top: 20px; padding: 10px;">
+      <h2 style="display: inline-block;"><%= article.title %></h2>
+      <p style="display: inline-block; text-align:right">Published: <%= l(article.created_at, format: '%d %b %y') %></p>
+      <p><%= article.text %></p>
+      <span><%= link_to 'Show', article_path(article) %></span>|
+      <span><%= link_to 'Edit', edit_article_path(article) %></span>|
+      <span><%= link_to 'Destroy', article_path(article),
+                      method: :delete, data: { confirm: 'Are you sure?' } %></span>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <div class="post" style="background-color: lightgrey; margin-top: 5px; padding: 5px;">
+      <h4 style="display: inline-block;"><%= article.title %></h4>
+      <p style="">Published: <%= l(article.created_at, format: '%d %b %y') %></p>
+    </div>
+  </div>
 <% end %>
 </table>
 
-<%= link_to 'New article', new_article_path %>
 
