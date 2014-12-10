@@ -1,21 +1,21 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<h1>My F***ing blog</h1>
 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+<div class="col-xs-8">
+    <div class="post" style="background-color: lightgrey; margin-top: 20px; padding: 10px;">
+      <h2><%= @article.title %></h2>
+      <p style="display: inline-block; text-align:right">Published: <%= l(@article.created_at, format: '%d %b %y') %></p>
 
-<h2>Comments</h2>
-<% @article.comments.each do |comment| %>
- <%= render 'comments/comment', comment: comment %>
-<% end %>
-<%# we could replace these 3 lines with <%= render @article.comments %>
+      <p><%= @article.text %></p>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+      <h4>Comments</h4>
+      <% @article.comments.each do |comment| %>
+       <%= render 'comments/comment', comment: comment %>
+      <% end %>
+      <%# we could replace these 3 lines with <%= render @article.comments %>
 
-<%= link_to 'Edit Article', edit_article_path(@article) %> |
-<%= link_to 'Back to Articles', articles_path %>
+      <%= render 'comments/form' %>
+
+      <%= link_to 'Edit Article', edit_article_path(@article) %> |
+      <%= link_to 'Back to Articles', articles_path %>
+  </div>
+</div>
