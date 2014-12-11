@@ -7,6 +7,9 @@
 
       <p><%= @article.text %></p>
 
+      <%= link_to 'Edit Article', edit_article_path(@article) %> |
+      <%= link_to 'Back to Articles', articles_path %>
+
       <h4>Comments</h4>
       <% @article.comments.each do |comment| %>
        <%= render 'comments/comment', comment: comment %>
@@ -15,7 +18,6 @@
 
       <%= render 'comments/form' %>
 
-      <%= link_to 'Edit Article', edit_article_path(@article) %> |
-      <%= link_to 'Back to Articles', articles_path %>
+
   </div>
 </div>
