@@ -2,6 +2,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+li.avatar {
+  padding: 3px;
+}
+
 .navbar-nav>li.avatar img {
 width: 55px;
 border: 2px solid lightgrey;
