@@ -1,3 +1,13 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.navbar-nav>li.avatar img {
+width: 55px;
+border: 2px solid lightgrey;
+padding: 1px;
+}
+
+.image-circle {
+border-radius: 50%;
+}
