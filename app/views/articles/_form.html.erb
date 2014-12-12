@@ -1,26 +1,21 @@
-<%= form_for @article do |f| %>
-  <% if @article.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@article.errors.count, "error") %> prohibited
-      this article from being saved:</h2>
-    <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+
+<%= form_for(@article, remote: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, autofocus: true, class: "form-control" %>
   </div>
-  <% end %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
 
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="form-group">
+    <%= f.label :text %>
+    <%= f.text_area :text, autofocus: true, class: "form-control" %>
+  </div>
+  <div>
+    <% if current_page?(:action => 'new') %>
+    <%= f.submit "Create post" ,class: "btn btn-success"%>
+    <% else %>
+    <%= f.submit "Modify the post" ,class: "btn btn-success" %>
+    <% end %>
+  </div>
 <% end %>
+

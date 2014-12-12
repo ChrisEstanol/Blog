@@ -1,0 +1,12 @@
+<% if @post.errors.any? %>
+  alert('Verify required fields')
+  <% @post.errors.full_messages.each do |msg| %>
+    alert('<%= msg %>');
+  <% end %>
+<% else %>
+
+  $('#addArticle').append('<tr><%=j render "append"%></tr>');
+
+  $('#created').show();
+
+<%end%>
