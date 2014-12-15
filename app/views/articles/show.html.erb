@@ -4,7 +4,7 @@
       <h2 style="display: inline-block;"><%= @article.title %></h2>
       <p style="display: inline-block; float:right">Published: <%= l(@article.created_at, format: '%d %b %y') %></p>
 
-      <p><%= @article.text %></p>
+      <p><%= @article.text.html_safe %></p>
 
       <%= link_to 'Edit Article', edit_article_path(@article) %> |
       <%= link_to 'Back to Articles', articles_path %>

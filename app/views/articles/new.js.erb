@@ -1,1 +1,5 @@
-$("<%= j render 'modal'%>").modal();
+$("<%= j render 'modal'%>").on('hidden.bs.modal', function() {
+  $(this).remove();
+}).on('shown.bs.modal', function() {
+  $("#html5-text").wysihtml5();
+}).modal();
