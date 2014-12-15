@@ -2,14 +2,24 @@
   <%= l(comment.created_at, format: '%d %b %y') %>
 </p>
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
+<div class="col-xs-2 text-center comment">
+  <%= image_tag Gravatar.new(comment.user.email).image_url, :class => "image-circle" %>
+  <p><%= comment.user.name %></p>
+</div>
 
+
+<div class="col-xs-10">
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+</div>
+
+<% if user_signed_in? %>
 <p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
+  <%= link_to 'Delete Comment', [comment.article, comment],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
 </p>
+<% end %>
 
