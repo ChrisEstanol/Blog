@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all.order("created_at DESC")
     @last = Article.order("created_at DESC").limit(5)
-    # @best = Article.comments.count
+    @commented = Article.joins(:comments).group(:article_id).order('count_all desc').limit(2).count
   end
 
   def edit

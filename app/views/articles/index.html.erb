@@ -12,6 +12,7 @@
             <h2 style="display: inline-block;"><%= link_to article.title, article_path(article) %></h2>
             <p class="text-right" style="display: inline-block; float:right">Published: <%= l(article.created_at, format: '%d %b %y') %></p>
             <p><%= article.text.html_safe %></p>
+            <!-- html_safe aded to render text editor output as HTML -->
 
             <p class="text-right"><%= article.comments.count %> Comments</p>
             <span><%= link_to 'Show', article_path(article) %></span>|
@@ -26,19 +27,27 @@
     <% end %>
   </div>
 
-
   <div class="col-xs-4">
     <div class="archive">
       <h3>Archive</h3>
       <% @last.each do |article| %>
         <div class="" style="background-color: lightgrey; margin-top: 5px; padding: 5px;">
-          <h4 style="display: inline-block;"><%= link_to article.title, article_path(article) %></h4>
+          <h4><%= link_to article.title, article_path(article) %></h4>
           <p style="">Published: <%= l(article.created_at, format: '%d %b %y') %></p>
         </div>
       <% end %>
     </div>
     <div class="most-comment">
       <h3>Most Comments</h3>
+      <% @commented.each do |key, value| %>
+        <div class="" style="background-color: lightgrey; margin-top: 5px; padding: 5px;">
+        <% find_article = Article.find(key) %>
+        <h4 style="display: inline-block;"><%= link_to find_article.title, article_path(find_article) %></h4>
+        <p><%= value %> comments</p>
+        </div>
+      <% end %>
+
+<!-- Because we have "count" We iterate over a hash and need to find the article coresponding to the id we had returned -->
     </div>
   </div>
 
