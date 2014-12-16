@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
-  # http_basic_authenticate_with name: "dhh", password: "secret", only: :destroy
+
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!,   except: [:index, :show]
 
   def create
     @article = Article.find(params[:article_id])
@@ -18,6 +21,17 @@ class CommentsController < ApplicationController
   end
 
   private
+
+    def set_comment
+      @article = Article.find(params[:article_id])
+      @comment = Article.find(params[:id])
+    end
+
+    def correct_user
+      @article = current_user.articles.find(params[:id])
+      redirect_to articles_path if @article.nil?
+    end
+
     def comment_params
       params.require(:comment).permit(:commenter, :body)
     end

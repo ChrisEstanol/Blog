@@ -1,12 +1,15 @@
 class ArticlesController < ApplicationController
-# http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!,   except: [:index, :show]
 
   def new
-    @article = Article.new
+    @article = current_user.articles.build
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.build(article_params)
     @article.user_id = current_user.id
 
     @article.save
@@ -41,11 +44,24 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
+    @article.user_id = current_user.id
 
     redirect_to articles_path
   end
 
+
+
   private
+
+    def set_article
+      @article = Article.find(params[:id])
+    end
+
+    def correct_user
+      @article = current_user.articles.find(params[:id])
+      redirect_to articles_path if @article.nil?
+    end
+
     def article_params
       params.require(:article).permit(:title, :text)
     end
