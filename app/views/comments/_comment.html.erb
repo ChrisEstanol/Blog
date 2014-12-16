@@ -15,7 +15,7 @@
   </p>
 </div>
 
-<% if user_signed_in? %>
+<% if comment.user == current_user %>
 <p>
   <%= link_to 'Delete Comment', [comment.article, comment],
                method: :delete,

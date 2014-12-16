@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
 
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!,   except: [:index, :show]
+  before_action :set_comment, only: [:create, :destroy]
+  # before_action :correct_user, only: [ :destroy]
+  before_action :authenticate_user!,   only: [:create, :destroy]
 
   def create
     @article = Article.find(params[:article_id])
@@ -24,13 +24,12 @@ class CommentsController < ApplicationController
 
     def set_comment
       @article = Article.find(params[:article_id])
-      @comment = Article.find(params[:id])
     end
 
-    def correct_user
-      @article = current_user.articles.find(params[:id])
-      redirect_to articles_path if @article.nil?
-    end
+    # def correct_user
+    #   @article = current_user.articles.find(params[:id])
+    #   redirect_to articles_path if @article.nil?
+    # end
 
     def comment_params
       params.require(:comment).permit(:commenter, :body)
